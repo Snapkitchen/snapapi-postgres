@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -e
+
+source hooks/common.bash
+
+versions=($(get_versions))
+
+for version in "${versions[@]}"
+do
+  postgres_version="$(get_postgres_version "${version}")"
+  postgis_version="$(get_postgis_version "${version}")"
+  echo "building image ${DOCKER_REPO}:${version}"
+  echo "postgres version: ${postgres_version}"
+  echo "postgis version: ${postgis_version}"
+  docker build \
+      --build-arg "POSTGRES_VERSION=${postgres_version}" \
+      --build-arg "POSTGIS_VERSION=${postgis_version}" \
+      --tag "${DOCKER_REPO}:${version}" \
+      .
+done

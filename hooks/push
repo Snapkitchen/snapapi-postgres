@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -e
+
+source hooks/common.bash
+
+versions=($(get_versions))
+
+for version in "${versions[@]}"
+do
+  echo "pushing image ${DOCKER_REPO}:${version}"
+  docker push "${DOCKER_REPO}:${version}"
+done
