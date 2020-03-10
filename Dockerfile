@@ -11,9 +11,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     "postgis=${POSTGIS_VERSION}.*" \
     curl \
     unzip \
-  && mkdir -p '/var/cache/tz/world' \
+  && mkdir -p '/var/cache/tz' \
   && curl -o '/tmp/tz_world.zip' 'http://efele.net/maps/tz/world/tz_world.zip' \
-  && unzip -o '/tmp/tz_world.zip' -d '/var/cache/tz/world' \
+  && unzip -o '/tmp/tz_world.zip' -d '/var/cache/tz' \
   && rm '/tmp/tz_world.zip' \
   && DEBIAN_FRONTEND=noninteractive apt-get -y remove --purge \
     curl \
